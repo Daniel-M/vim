@@ -101,3 +101,13 @@ filetype indent on
 " " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
+"
+"
+" Set Spell Cheking ON, useful when writing stuff
+"
+"spanish spell checking not tested
+"setlocal spell spelllang=es_es
+"
+"english spell checking tested and working
+setlocal spell spelllang=en_us
