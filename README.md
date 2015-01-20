@@ -14,8 +14,8 @@ If you are a Debian user, you must enable the latex-suite addon by following the
  
  > /usr/share/doc/vim-latexsuite/README.Debian  
 
-by invoking vim-addon-manager   
+They suggest invoking vim-addon-manager to enable the plugin vim-latexsuite as
 
  > $ vim-addons install latex-suite  
 
-In order to be able to use this fancy plugin
+In order to be able to use it
