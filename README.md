@@ -1,5 +1,7 @@
 # vim  
 
+##### **last update:** April 2016
+
 This repository contains the personalized files for my vim plug-ins. This folder must be located at your home folder once the plug-ins are installed  
 (BTW I'm using Debian Testing)
 
@@ -14,9 +16,9 @@ Check the web to find more plugins suitable for you. Also, check the repositorie
 
 ### Important remarks
 
-Add-ons can be easily installed invoking *vim-addon-manager*.     
+* Add-ons can be easily installed invoking *vim-addon-manager*.
 For instance, installing the plugin *vim-latexsuite* can be done as,
 
- > $ vim-addons install latex-suite  
+`$ vim-addons install latex-suite`   
 
-**last update:** September 2015
+* Copy the files to your home folder.   
