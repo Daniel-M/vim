@@ -1,24 +1,31 @@
 # vim  
 
-##### **last update:** April 2016
+##### **last update:** August 2017
 
-This repository contains the personalized files for my vim plug-ins. This folder must be located at your home folder once the plug-ins are installed  
-(BTW I'm using Debian Testing)
+Compiled vim from sources
+
+```sh
+git clone https://github.com/vim/vim.git
+```
+
+```
+cd vim/src
+make -j4
+```
+
+You'd need `make install` as root in order to install the compiled vim.
+
+#### Usage
+
+Clone this repository and create symbolic links
+
+```sh
+ln -s /path/to/cloned/repo/dotvim ~/.vim
+ln -s /path/to/cloned/repo/dotvimrc ~/.vimrc
+```
+
+Open `vim` and invoke `:PlugInstall`
 
 #### List of Plugins installed
-The list of plug-ins installed are managed using *vim-addon-manager*    
 
- * vim-latexsuite (*Syntax support and utilies to edit latex text. Very recommended if you use latex*)   
- * vim-syntastic (*Syntax highlighting for a lot of languages*)    
- * vim-youcompleteme (*Vim autocompletion. So useful when coding*)   
-
-Check the web to find more plugins suitable for you. Also, check the repositories for the plug-ins above to obtain more information and updates.   
-
-### Important remarks
-
-* Add-ons can be easily installed invoking *vim-addon-manager*.
-For instance, installing the plugin *vim-latexsuite* can be done as,
-
-`$ vim-addons install latex-suite`   
-
-* Copy the files to your home folder.   
+Look the plugins sections on `.vimrc`(`dotvimrc`)

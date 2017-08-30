@@ -1,0 +1,158 @@
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+" NERDTree plugin to have a nav-bar
+" On-demand loading when calling :NERDTreeToggle
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
+
+" Orgasmic commenting tool
+Plug 'https://github.com/scrooloose/nerdcommenter', { 'tag': '*' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
+
+" Autocompletion daemon for vim
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+" Syntaxtic replacement
+"Plug 'https://github.com/neomake/neomake.git', { 'tag': '*' }
+Plug 'https://github.com/neomake/neomake.git'
+
+" Sneak is a minimalist, versatile Vim motion plugin
+Plug 'https://github.com/justinmk/vim-sneak'
+
+" The colorscheme with neovim in mind.
+Plug 'https://github.com/freeo/vim-kalisi'
+
+" Latex Plugin
+Plug 'https://github.com/lervag/vimtex'
+
+" Neocomplete - completion for Neovim
+Plug 'https://github.com/Shougo/neocomplete.vim' , {'do':':NeoCompleteEnable'}
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" Initialize plugin system
+call plug#end()
+
+" *************************************
+" END OF PLUGIN SECTION
+" *************************************
+
+
+" *************************************
+" PLUGIN CONFIGURATION SECTION
+" *************************************
+
+" Start Neocomplete plugin
+" The action :NeoCompleteEnable is enable in the plugin section for
+" Neocomplete
+"let g:neocomplete#enable_at_startup = 1 
+
+" Snippets directory
+let g:UltiSnipsSnippetDirectories="~/.vim/plugged/vim-snippets/UltiSnips"
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" To activate vimtex filetype detection.
+" The desired ft=tex, but somtimes neovim detects ft=plaintex
+" thus nothing related to vimtex works
+let g:tex_flavor = 'latex'
+" *************************************
+" END PLUGIN CONFIGURATION SECTION
+" *************************************
+
+
+
+" *************************************
+" KEYMAPPING AND TWEAKING SECTION
+" *************************************
+
+" Actually delete characters
+set backspace=2
+
+"hightlighting disabling
+nmap \q :nohlsearch<CR> 
+
+"SEARCH AND HIGHLIGHTING
+
+set showmatch
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
+" Show line and column number in the status bar
+set ruler
+
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
+
+" Show mark at 80 chars length
+"set cc=80
+
+"Deactivating vim-kalisi colorscheme
+"colorscheme default 
+"colorscheme industry 
+"colorscheme koehler 
+
+"Activating vim-kalisi colorscheme
+colorscheme kalisi 
+"set background=light
+set background=dark
+
+set t_Co=256
+" in case t_Co alone doesn't work, add this as well:
+"let &t_AB="\e[48;5;%dm"
+"let &t_AF="\e[38;5;%dm"
+
+" *************************************
+" KEYMAPPING
+" *************************************
+
+" commenting and uncommenting with NERDCommenter plugin
+nmap <C-c> \cc 
+vmap <C-c> \ci 
+nmap <C-x> \cu
+vmap <C-x> \cu
+
+"line numbers
+nmap \ln :setlocal number!<CR>
+
+"paste mode
+set pastetoggle=<F3>
+
+"NERD Tree
+nmap \nt :NERDTreeToggle<CR>
+
+"buffer next and previous
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
+
+"search with cotrlP
+"nmap ; :CtrlPBuffer<CR>
+
+"
+" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
+"
+"spanish spell checking not tested
+"setlocal spell spelllang=es
+"
+"english spell checking tested and working
+setlocal spell spelllang=en

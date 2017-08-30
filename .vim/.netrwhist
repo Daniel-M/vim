@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/muzgash/Projects/demeus/application/views'
-let g:netrw_dirhist_2='/home/muzgash/Projects/demeus/application/views/scripts'
-let g:netrw_dirhist_3='/home/muzgash/Projects/demeus/application/views/scripts/index'
-let g:netrw_dirhist_4='/home/muzgash/Projects/Seminario/Algoritmia/SeminarioGfifDev/ListasLigadas'
-let g:netrw_dirhist_5='/home/muzgash/Projects/esbirra/src'
