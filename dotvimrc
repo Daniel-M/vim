@@ -52,7 +52,7 @@ call plug#end()
 " Start Neocomplete plugin
 " The action :NeoCompleteEnable is enable in the plugin section for
 " Neocomplete
-"let g:neocomplete#enable_at_startup = 1 
+let g:neocomplete#enable_at_startup = 1 
 
 " Snippets directory
 let g:UltiSnipsSnippetDirectories="~/.vim/plugged/vim-snippets/UltiSnips"
