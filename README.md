@@ -7,20 +7,14 @@ Compiled vim from sources
 ```sh
 git clone https://github.com/vim/vim.git
 ```
-
-```
-cd vim/src
-make -j4
-```
-
-You'd need `make install` as root in order to install the compiled vim.
+You will need to enable Python2, Python3, Lua, and Perl support in order to use some plug-ins here.
 
 #### Usage
 
 Clone this repository and create symbolic links
 
 ```sh
-ln -s /path/to/cloned/repo/dotvim ~/.vim
+ln -s /path/to/cloned/repo/dotvim/autoload/plug.vim ~/.vim/autoload/plug.vim
 ln -s /path/to/cloned/repo/dotvimrc ~/.vimrc
 ```
 

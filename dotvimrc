@@ -79,7 +79,7 @@ let g:tex_flavor = 'latex'
 " KEYMAPPING AND TWEAKING SECTION
 " *************************************
 
-" Actually delete characters
+" Actually delete characters when using the backspace
 set backspace=2
 
 "hightlighting disabling
