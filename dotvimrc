@@ -18,8 +18,7 @@ Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
 " Autocompletion daemon for vim
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
-" Syntaxtic replacement
-"Plug 'https://github.com/neomake/neomake.git', { 'tag': '*' }
+" Syntastic replacement
 Plug 'https://github.com/neomake/neomake.git'
 
 " Sneak is a minimalist, versatile Vim motion plugin
@@ -49,6 +48,22 @@ call plug#end()
 " PLUGIN CONFIGURATION SECTION
 " *************************************
 
+"""
+" Configure neomake
+"
+
+" Set log files
+let g:neomake_logfile = "/tmp/neomake.log"
+
+
+" When writing a buffer.
+call neomake#configure#automake('w')
+" When writing a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" When reading a buffer (after 1s), and when writing.
+call neomake#configure#automake('rw', 1000)
+
+"""""
 " Start Neocomplete plugin
 " The action :NeoCompleteEnable is enable in the plugin section for
 " Neocomplete
@@ -65,6 +80,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+""""
 " To activate vimtex filetype detection.
 " The desired ft=tex, but somtimes neovim detects ft=plaintex
 " thus nothing related to vimtex works
@@ -85,6 +101,7 @@ set backspace=2
 "hightlighting disabling
 nmap \q :nohlsearch<CR> 
 
+""""
 "SEARCH AND HIGHLIGHTING
 
 set showmatch
@@ -104,8 +121,28 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
-" Show mark at 80 chars length
+" Show mark at 80 chars length (mostly for go doc comments)
 "set cc=80
+
+" Allow mouse click enabled in terminal
+" mouse click places cursor there 
+set mouse=a
+
+
+"
+" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
+"
+"spanish spell checking not tested
+"setlocal spell spelllang=es
+"
+"english spell checking tested and working
+"setlocal spell spelllang=en
+set spell spelllang=en
+
+
+"
+" COLOR SCHEMES
+"
 
 "Deactivating vim-kalisi colorscheme
 "colorscheme default 
@@ -148,11 +185,3 @@ nmap <C-p> :bprev<CR>
 "search with cotrlP
 "nmap ; :CtrlPBuffer<CR>
 
-"
-" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
-"
-"spanish spell checking not tested
-"setlocal spell spelllang=es
-"
-"english spell checking tested and working
-setlocal spell spelllang=en
