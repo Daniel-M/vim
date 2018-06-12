@@ -11,7 +11,7 @@ The configuration files are hidden by the dot.
 Clone this repo at `~/.vim` (the directory must not exists!)
 
 ```
-git@github.com:Daniel-M/vim.git ~/.vim
+git clone git@github.com:Daniel-M/vim.git ~/.vim
 ```
 
 ### Step 2
