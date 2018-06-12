@@ -3,6 +3,7 @@
 # Introduction
 
 Those are my config files for Vim with [Vim-Plug](https://github.com/junegunn/vim-plug)
+The configuration files are hidden by the dot.
 
 # Installation
 
