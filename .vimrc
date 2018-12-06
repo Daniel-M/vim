@@ -22,10 +22,10 @@ Plug 'nathanaelkane/vim-indent-guides'
 "" LANGUAGE SPECIFIC PLUGINS
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
+Plug 'https://github.com/fatih/vim-go', { 'do': ':GoUpdateBinaries'}
 
-" GoLang Syntax checker for nvim
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh'}
+" GoLang Syntax checker for vim
+Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " Syntaxtic replacement, since syntaxtic is not supported in nvim yet
 Plug 'https://github.com/neomake/neomake.git'
@@ -74,8 +74,12 @@ Plug 'https://github.com/icymind/neosolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Silver searcher
+Plug 'https://github.com/gabesoft/vim-ags'
+
 " Add plugins to &runtimepath
 call plug#end()
+
 
 " *************************************
 " END OF PLUGIN SECTION
@@ -87,6 +91,11 @@ call plug#end()
 " *************************************
 
 """
+" Configure vim-ag silver searcher
+"
+let g:ags_enable_async = 1
+
+"""
 " Configure Deoplete 
 "
 " Start Deoplete plugin
@@ -95,14 +104,14 @@ let g:deoplete#enable_at_startup = 1
 " Required by typescript in Neovim
 let g:deoplete#enable_debug = 1
 let g:deoplete#enable_profile = 1
-call deoplete#enable_logging('DEBUG', '/tmp/deoplete_vim.log')
+call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
 
 
 """
 " Configure neomake
 "
 " Set log files
-let g:neomake_logfile = "/tmp/neomake_vim.log"
+let g:neomake_logfile = "/tmp/neomake_neovim.log"
 " When writing a buffer.
 call neomake#configure#automake('w')
 " When writing a buffer, and on normal mode changes (after 750ms).
@@ -110,11 +119,13 @@ call neomake#configure#automake('nw', 750)
 " When reading a buffer (after 1s), and when writing.
 call neomake#configure#automake('rw', 1000)
 
+
 """
 " Configure UltiSnips - Snippets
 "
 " Snippets directory
-"let g:UltiSnipsSnippetDirectories="~/.vim/plugged/vim-snippets/UltiSnips"
+"let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -129,7 +140,7 @@ let g:jsx_ext_required = 0
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
-let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_enable_on_vim_startup = 1
 
 """
 " Configure vimtex
@@ -143,14 +154,14 @@ let g:tex_flavor = 'latex'
 " ALE plugin configurations
 "
 " Enable completion where available.
-let g:ale_completion_enabled = 1
+"let g:ale_completion_enabled = 1
 "
 " Enable status bar messages. Set this,
 " Airline will handle the rest.
-let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#ale#enabled = 1
 "
 " Show 5 lines of errors (default: 10)
-let g:ale_list_window_size = 5
+"let g:ale_list_window_size = 5
 
 
 """
@@ -160,7 +171,44 @@ let g:ale_list_window_size = 5
 let g:airline_detect_spell=1
 "
 " Set the dark theme
-let g:airline_theme='dark'
+"let g:airline_theme='dark'
+let g:airline_theme='cool'
+
+"let g:airline_powerline_fonts = 1
+"if !exists('g:airline_symbols')
+  "let g:airline_symbols = {}
+"endif
+"let g:airline_symbols.space = "\ua0"
+
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_sep = ' '
+let g:airline#extensions#tabline#right_alt_sep = '|'
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = '|'
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = '|'
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+
+
 
 
 " *************************************
@@ -169,20 +217,29 @@ let g:airline_theme='dark'
 
 
 
+
 " *************************************
 " KEYMAPPING AND TWEAKING SECTION
 " *************************************
+" Recall that <leader> maps to "\" by default
+" so <leader>q means "\q"on a default installation
 
 " Actually delete characters when using the backspace
 set backspace=2
 
-"hightlighting disabling
-nmap \q :nohlsearch<CR> 
+"highlighting disabling
+nmap <leader>q :nohlsearch<CR> 
 
-""""
+"""""
 "SEARCH AND HIGHLIGHTING
 
+" Show matching brackets
 set showmatch
+" Show line numbers
+set number
+" Continue comment marker on new lines
+set formatoptions+=o
+
 set incsearch
 set ignorecase
 set smartcase
@@ -195,15 +252,13 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 " show existing tab with 4 spaces width
-"set tabstop=4
 set tabstop=2 "Parallelo configs
 " when indenting with '>', use 4 spaces width
-"set shiftwidth=4
 set shiftwidth=2 "Parallelo configs
-" On pressing tab, insert 4 spaces
+" On pressing tab, insert 2 spaces
 set expandtab
 
-" Show mark at 80 chars length (mostly for go doc comments)
+" Show mark at 80 chars length
 set colorcolumn=80
 
 " Word wrapping
@@ -245,31 +300,29 @@ set background=dark
 
 "colorscheme NeoSolarized
 
-
 set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
-"let &t_AB="\e[48;5;%dm"
-"let &t_AF="\e[38;5;%dm"
-
+"let &t_AB="<leader>e[48;5;%dm"
+"let &t_AF="<leader>e[38;5;%dm"
 
 " *************************************
 " KEYMAPPING
 " *************************************
 
 " commenting and uncommenting with NERDCommenter plugin
-nmap <C-c> \cc 
-vmap <C-c> \ci 
-nmap <C-x> \cu
-vmap <C-x> \cu
+nmap <C-c> <leader>cc 
+vmap <C-c> <leader>ci 
+nmap <C-x> <leader>cu
+vmap <C-x> <leader>cu
 
 "line numbers
-nmap \ln :setlocal number!<CR>
+nmap <leader>ln :setlocal number!<CR>
 
 "paste mode
 set pastetoggle=<F3>
 
 "NERD Tree
-nmap \nt :NERDTreeToggle<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
 
 "buffer next and previous
 nmap <C-n> :bnext<CR>
@@ -278,6 +331,14 @@ nmap <C-p> :bprev<CR>
 "search with cotrlP
 "nmap ; :CtrlPBuffer<CR>
 
+inoremap , ,<space>
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 """
 " Adding manual configuration for Prettier
